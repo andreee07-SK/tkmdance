@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TK M-DANCE Hlohovec — Tanečný klub</title>
+<meta name="description" content="TK M-DANCE Hlohovec — tanečný klub pre deti, dospelých aj seniorov. Štandardné, latinsko-americké, ľudové a plesové tance.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Josefin+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════
+   FARBY & PREMENNÉ
+═══════════════════════════════════════ */
+:root {
+  --bezova-svetla:  #f5ead8;
+  --bezova-tmava:   #d4b880;
+  --hneda-primarna: #3a2010;
+  --hneda-akcent:   #8a5830;
+  --bezova-text:    #e8d0a8;
+  --strip-bg:       #dcc898;
+  --hneda-stredna:  #5a3820;
+  --gradient: linear-gradient(180deg, #f5ead8 0%, #d4b880 100%);
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Crimson Text', serif;
+  background: var(--gradient);
+  color: var(--hneda-primarna);
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════
+   TYPOGRAFIA
+═══════════════════════════════════════ */
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+p { line-height: 1.7; }
+
+.section-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--hneda-akcent);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1.5rem;
+}
+.divider {
+  width: 80px;
+  height: 1px;
+  background: var(--hneda-akcent);
+  margin: 0 auto 2rem;
+}
+.divider-left {
+  width: 80px;
+  height: 1px;
+  background: var(--hneda-akcent);
+  margin: 0 0 2rem;
+}
+
+/* ═══════════════════════════════════════
+   TLAČIDLÁ
+═══════════════════════════════════════ */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 2.2rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+.btn:hover { opacity: 0.85; }
+.btn-primary { background: var(--hneda-primarna); color: var(--bezova-text); }
+.btn-secondary { background: transparent; border: 1px solid var(--hneda-akcent); color: var(--hneda-stredna); }
+.btn-light { background: var(--bezova-text); color: var(--hneda-primarna); }
+.btn-light-outline { background: transparent; border: 1px solid var(--bezova-text); color: var(--bezova-text); }
+
+/* ═══════════════════════════════════════
+   SEKCIE — svetlá vs tmavá
+═══════════════════════════════════════ */
+.section-light {
+  background: var(--gradient);
+  color: var(--hneda-primarna);
+  padding: 5rem 2rem;
+}
+.section-dark {
+  background: var(--hneda-primarna);
+  color: var(--bezova-text);
+  padding: 5rem 2rem;
+}
+.section-dark .section-label { color: var(--hneda-akcent); }
+.section-dark .section-title { color: var(--bezova-text); }
+.section-dark .divider { background: var(--hneda-akcent); }
+.section-dark .divider-left { background: var(--hneda-akcent); }
+.section-dark p { color: var(--bezova-text); opacity: 0.85; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.text-center { text-align: center; }
+
+/* ═══════════════════════════════════════
+   NAVIGÁCIA
+═══════════════════════════════════════ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--hneda-primarna);
+  border-bottom: 2px solid var(--hneda-akcent);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--bezova-text);
+  letter-spacing: 0.15em;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bezova-text);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-contact {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--bezova-text);
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--gradient);
+}
+
+.hero-motto {
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--hneda-stredna);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-eyebrow {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--hneda-akcent);
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 900;
+  color: var(--hneda-primarna);
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: var(--hneda-stredna);
+  margin-bottom: 2.5rem;
+}
+
+.hero-desc {
+  font-family: 'Crimson Text', serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--hneda-stredna);
+  max-width: 540px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════
+   STRIP (spodný pás hero)
+═══════════════════════════════════════ */
+.strip {
+  background: var(--strip-bg);
+  border-top: 1px solid var(--hneda-akcent);
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.strip-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--hneda-primarna);
+}
+.strip-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--hneda-akcent);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   KARTY (rozvrh)
+═══════════════════════════════════════ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.card {
+  background: rgba(255,255,255,0.25);
+  border: 1px solid var(--hneda-akcent);
+  padding: 2rem;
+  border-radius: 2px;
+}
+.card-dark {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--hneda-akcent);
+  padding: 2rem;
+  border-radius: 2px;
+}
+.card h3, .card-dark h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+.card-dark h3 { color: var(--bezova-text); }
+.card-dark p { color: var(--bezova-text); opacity: 0.8; }
+.card-meta {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hneda-akcent);
+  margin-bottom: 0.4rem;
+}
+.card-time {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--hneda-primarna);
+  margin-bottom: 0.25rem;
+}
+.card-dark .card-time { color: var(--bezova-text); }
+.card-day {
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  color: var(--hneda-stredna);
+}
+.card-dark .card-day { color: var(--bezova-text); opacity: 0.7; }
+
+/* ═══════════════════════════════════════
+   TANCE TAGY
+═══════════════════════════════════════ */
+.dance-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+.tag {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--hneda-akcent);
+  color: var(--hneda-stredna);
+  border-radius: 1px;
+}
+.tag-dark {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(138,88,48,0.6);
+  color: var(--bezova-text);
+  border-radius: 1px;
+  opacity: 0.75;
+}
+
+/* ═══════════════════════════════════════
+   DVOJSTĹPCOVÉ ROZLOŽENIE
+═══════════════════════════════════════ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+@media (max-width: 700px) {
+  .two-col { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+/* ═══════════════════════════════════════
+   FOTKY / PLACEHOLDER
+═══════════════════════════════════════ */
+.img-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+.img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: rgba(138, 88, 48, 0.12);
+  border: 2px dashed var(--hneda-akcent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--hneda-akcent);
+  border-radius: 2px;
+}
+.img-placeholder-dark {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: rgba(255,255,255,0.04);
+  border: 2px dashed rgba(138,88,48,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--hneda-akcent);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+.placeholder-icon { font-size: 1.8rem; opacity: 0.5; }
+
+/* ═══════════════════════════════════════
+   KONTAKT
+═══════════════════════════════════════ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.contact-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--hneda-akcent);
+}
+.contact-value {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.2rem;
+  color: var(--bezova-text);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.contact-value:hover { opacity: 0.7; }
+.contact-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--bezova-text);
+  margin-bottom: 0.25rem;
+}
+.contact-title-sub {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hneda-akcent);
+}
+
+/* ═══════════════════════════════════════
+   FEATURE LIST
+═══════════════════════════════════════ */
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 1.25rem 0;
+}
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--hneda-stredna);
+}
+.feature-list-dark li {
+  color: var(--bezova-text);
+  opacity: 0.85;
+}
+.feature-list li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--hneda-akcent);
+  flex-shrink: 0;
+  margin-top: 0.45rem;
+}
+
+/* ═══════════════════════════════════════
+   DANCE TYPE SKUPINY
+═══════════════════════════════════════ */
+.dance-group {
+  margin-bottom: 1rem;
+}
+.dance-group-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--hneda-akcent);
+  margin-bottom: 0.4rem;
+}
+.dance-group-items {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.05rem;
+  color: var(--bezova-text);
+  opacity: 0.85;
+}
+
+/* ═══════════════════════════════════════
+   COMING SOON BADGE
+═══════════════════════════════════════ */
+.badge {
+  display: inline-block;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  background: var(--hneda-akcent);
+  color: var(--bezova-text);
+  border-radius: 1px;
+  margin-bottom: 1.25rem;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background: #251408;
+  color: var(--bezova-text);
+  text-align: center;
+  padding: 2rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════
+   RESPONZIVITA
+═══════════════════════════════════════ */
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .strip { gap: 1.5rem; }
+  .section-light, .section-dark { padding: 3rem 1.25rem; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGÁCIA ═══ -->
+<nav>
+  <a class="nav-logo" href="#">TK M-DANCE</a>
+  <ul class="nav-links">
+    <li><a href="#o-klube">O klube</a></li>
+    <li><a href="#deti">Deti</a></li>
+    <li><a href="#dospeli">Dospelí</a></li>
+    <li><a href="#pripravujeme">Pripravujeme</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <span class="nav-contact">+421 908 580 598</span>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <p class="hero-motto">„Tanec je radosť, načerpanie novej energie"</p>
+  <p class="hero-eyebrow">Tanečný klub · Hlohovec</p>
+  <h1 class="hero-title">TK M-DANCE<br>Hlohovec</h1>
+  <p class="hero-subtitle">Tancujeme s radosťou — pre každého</p>
+  <div class="divider"></div>
+  <p class="hero-desc">
+    Spoločenské, štandardné, latinsko-americké aj ľudové tance pre deti, dospelých a seniorov.
+    Príďte objaviť radosť z pohybu a skvelú atmosféru nášho klubu.
+  </p>
+  <div class="hero-buttons">
+    <a href="#o-klube" class="btn btn-primary">Zistiť viac</a>
+    <a href="#kontakt" class="btn btn-secondary">Kontakt</a>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <span class="strip-item"><span class="strip-dot"></span>Deti od 6 rokov</span>
+  <span class="strip-item"><span class="strip-dot"></span>Dospelí &amp; seniori</span>
+  <span class="strip-item"><span class="strip-dot"></span>Latino kurz</span>
+</div>
+
+<!-- ═══ O KLUBE ═══ -->
+<section class="section-dark" id="o-klube">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <p class="section-label">Tanečný klub</p>
+        <h2 class="section-title">O klube</h2>
+        <div class="divider-left"></div>
+        <p style="margin-bottom:1.25rem;">
+          TK M-DANCE je tanečný klub v Hlohovci, ktorý sa venuje výučbe spoločenských tancov —
+          štandardných, latinsko-amerických, ale aj ľudových a plesových.
+        </p>
+        <p style="margin-bottom:1.5rem;">
+          V našom tanečnom klube sa učia deti od 6 rokov, rodičia, dospelí a seniori z celého okolia.
+        </p>
+        <p class="section-label" style="margin-bottom:0.75rem;">Naše ciele</p>
+        <ul class="feature-list feature-list-dark">
+          <li>Radosť a rozvoj tanca</li>
+          <li>Uvoľniť sa a načerpať novú energiu</li>
+          <li>Užiť skvelú atmosféru</li>
+        </ul>
+      </div>
+      <div>
+        <div class="img-placeholder-dark">
+          <span class="placeholder-icon">📸</span>
+          <span>Foto klubu</span>
+          <!-- Po dodaní fotky nahradiť:
+          <img src="images/klub.jpg" alt="TK M-DANCE Hlohovec — pohľad na tréning"> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DETI ═══ -->
+<section class="section-light" id="deti">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <p class="section-label">Kurzy pre mladých</p>
+        <h2 class="section-title">Deti od 6 rokov</h2>
+        <div class="divider-left"></div>
+        <p style="margin-bottom:1.25rem;">
+          Zábavná výučba tanečných základov, zameraná pre dievčatá, ktoré majú radosť z tanca.
+          Rozvíjame pohybové schopnosti, cit pre hudbu, základné choreografie na vystúpenia,
+          prípadne na súťaže.
+        </p>
+        <p class="section-label" style="margin-bottom:0.5rem;">Tance</p>
+        <div class="dance-tags">
+          <span class="tag">Samba</span>
+          <span class="tag">Cha-cha</span>
+          <span class="tag">Rumba</span>
+          <span class="tag">Jive</span>
+          <span class="tag">Polka</span>
+          <span class="tag">Waltz</span>
+          <span class="tag">Tango</span>
+          <span class="tag">Valčík</span>
+          <span class="tag">Quickstep</span>
+        </div>
+        <p class="section-label" style="margin-bottom:0.75rem; margin-top:1rem;">Rozvrh tréningov</p>
+        <div class="cards">
+          <div class="card">
+            <p class="card-meta">ZŠ Bojničky</p>
+            <p class="card-day">Utorok &amp; Štvrtok</p>
+            <p class="card-time">16:30 – 17:30</p>
+          </div>
+          <div class="card">
+            <p class="card-meta">AXA Klub Hlohovec</p>
+            <p class="card-day">Streda</p>
+            <p class="card-time">16:00 – 17:30</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="img-placeholder">
+          <span class="placeholder-icon">📸</span>
+          <span>Foto / Video — deti</span>
+          <!-- Po dodaní fotky nahradiť:
+          <img src="images/deti.jpg" alt="Deti na tanečnom tréningu TK M-DANCE"> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOSPELÍ & SENIORI ═══ -->
+<section class="section-dark" id="dospeli">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <p class="section-label">Pre každého</p>
+        <h2 class="section-title">Dospelí &amp; Seniori</h2>
+        <div class="divider-left"></div>
+        <p style="margin-bottom:1.25rem;">
+          Výučba je určená pre všetkých, ktorí chcú tancovať, uvoľniť sa a načerpať novú energiu.
+          Príďte si s nami užiť skvelú atmosféru — nezáleží na veku ani skúsenostiach.
+        </p>
+        <p class="section-label" style="margin-bottom:0.75rem;">Typy tancov</p>
+        <div class="dance-group">
+          <p class="dance-group-label">Štandardné</p>
+          <p class="dance-group-items">Waltz · Tango · Valčík · Quickstep</p>
+        </div>
+        <div class="dance-group">
+          <p class="dance-group-label">Latinsko-americké</p>
+          <p class="dance-group-items">Samba · Cha-cha · Rumba · Jive</p>
+        </div>
+        <div class="dance-group">
+          <p class="dance-group-label">Ľudové</p>
+          <p class="dance-group-items">Polka · Valčík</p>
+        </div>
+        <div class="dance-group">
+          <p class="dance-group-label">Ostatné</p>
+          <p class="dance-group-items">Plesové tance · Svadobné tance</p>
+        </div>
+        <p class="section-label" style="margin-bottom:0.75rem; margin-top:1.25rem;">Rozvrh tréningov</p>
+        <div class="cards" style="grid-template-columns: 1fr;">
+          <div class="card-dark">
+            <p class="card-meta">AXA Klub Hlohovec</p>
+            <p class="card-day">Nedeľa</p>
+            <p class="card-time" style="font-size:1.25rem; margin-top:0.5rem;">od 17:30 — Pokročilí</p>
+            <p class="card-time" style="font-size:1.25rem;">od 17:30 — Začiatočníci</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="img-placeholder-dark">
+          <span class="placeholder-icon">📸</span>
+          <span>Foto / Video — dospelí</span>
+          <!-- Po dodaní fotky nahradiť:
+          <img src="images/dospeli.jpg" alt="Dospelí a seniori na tanečnom kurze TK M-DANCE"> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRIPRAVUJEME ═══ -->
+<section class="section-light" id="pripravujeme">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <span class="badge">Pripravujeme</span>
+        <p class="section-label">Nový kurz</p>
+        <h2 class="section-title">Latino kurz pre ženy seniorky</h2>
+        <div class="divider-left"></div>
+        <p style="margin-bottom:1rem;">
+          Kurz je určený pre všetky ženy seniorky, ktoré chcú tancovať, uvoľniť sa
+          a načerpať novú energiu.
+        </p>
+        <p style="margin-bottom:1rem;">
+          Príďte si užiť skvelú atmosféru — nezáleží na veku ani skúsenostiach.
+          Stačí chuť pre seba niečo urobiť a prísť s úsmevom.
+        </p>
+        <p class="section-label" style="margin-bottom:0.5rem;">Tance</p>
+        <div class="dance-tags">
+          <span class="tag">Samba</span>
+          <span class="tag">Cha-cha</span>
+          <span class="tag">Rumba</span>
+          <span class="tag">Jive</span>
+          <span class="tag">Polka</span>
+          <span class="tag">Valčík</span>
+          <span class="tag">Tango</span>
+        </div>
+        <p class="section-label" style="margin-bottom:0.75rem; margin-top:1.25rem;">Rozvrh tréningov</p>
+        <div class="card" style="max-width:320px;">
+          <p class="card-meta">AXA Klub Hlohovec</p>
+          <p class="card-day">Streda</p>
+          <p class="card-time">od 17:30</p>
+          <p style="font-family:'Josefin Sans',sans-serif; font-size:0.62rem; letter-spacing:0.15em; color:var(--hneda-akcent); margin-top:0.5rem; text-transform:uppercase;">Presný čas sa upresní</p>
+        </div>
+      </div>
+      <div>
+        <div class="img-placeholder">
+          <span class="placeholder-icon">🎬</span>
+          <span>Video — Latino kurz</span>
+          <!-- Po dodaní videa/fotky nahradiť -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KONTAKT ═══ -->
+<section class="section-dark" id="kontakt">
+  <div class="container text-center">
+    <p class="section-label">Napíšte nám</p>
+    <h2 class="section-title">Kontakt</h2>
+    <div class="divider"></div>
+    <p style="max-width:500px; margin: 0 auto 3rem; font-size:1.1rem;">
+      Máte otázky alebo sa chcete prihlásiť? Neváhajte nás kontaktovať — radi vás privítame!
+    </p>
+
+    <!-- Tréner -->
+    <div style="margin-bottom:2.5rem;">
+      <p class="contact-name">Ľudovít Moder</p>
+      <p class="contact-title-sub">Diplom. učiteľ tancov</p>
+    </div>
+
+    <!-- Kontaktné údaje -->
+    <div class="contact-grid" style="max-width:800px; margin: 0 auto 3rem;">
+      <div class="contact-item">
+        <span class="contact-label">Telefón</span>
+        <a href="tel:+421908580598" class="contact-value">+421 908 580 598</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">E-mail</span>
+        <a href="mailto:andreee07@gmail.com" class="contact-value">andreee07@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Facebook</span>
+        <a href="#" class="contact-value" target="_blank" rel="noopener">TK M-DANCE Hlohovec</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Miesta tréningov</span>
+        <span class="contact-value">AXA Klub Hlohovec</span>
+        <span class="contact-value">ZŠ Bojničky</span>
+      </div>
+    </div>
+
+    <a href="tel:+421908580598" class="btn btn-light">Zavolajte nám</a>
+    &nbsp;&nbsp;
+    <a href="mailto:andreee07@gmail.com" class="btn btn-light-outline">Napíšte e-mail</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  © 2025 TK M-DANCE Hlohovec &nbsp;·&nbsp; Všetky práva vyhradené
+</footer>
+
+</body>
+</html>
