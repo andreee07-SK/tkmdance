@@ -112,6 +112,41 @@ nav { position:sticky; top:0; z-index:100; background:var(--hneda-primarna); bor
 .contact-name      { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--bezova-text); margin-bottom:0.25rem; }
 .contact-title-sub { font-family:'Josefin Sans',sans-serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--hneda-akcent); }
 
+/* 2% SEKCIA */
+.perc-box {
+  border: 1px solid var(--hneda-akcent);
+  border-radius: 2px;
+  padding: 2.5rem 3rem;
+  max-width: 700px;
+  margin: 2.5rem auto 0;
+  background: rgba(255,255,255,0.04);
+  position: relative;
+}
+.perc-box::before {
+  content: '2%';
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--hneda-akcent);
+  line-height: 1;
+  background: var(--hneda-primarna);
+  padding: 0 1rem;
+}
+.perc-box p {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  color: var(--bezova-text);
+  opacity: 0.85;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+.perc-box p:last-of-type { margin-bottom: 1.75rem; }
+.perc-ico { font-size: 0.95rem; color: var(--bezova-text); opacity: 0.65; margin-bottom: 0.5rem; font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.15em; font-size: 0.68rem; text-transform: uppercase; }
+
 footer { background:#251408; color:var(--bezova-text); text-align:center; padding:2rem; font-family:'Josefin Sans',sans-serif; font-size:0.68rem; letter-spacing:0.2em; opacity:0.7; }
 
 @media (max-width:600px) {
@@ -119,6 +154,89 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
   .strip { gap:1.5rem; }
   .section-light, .section-dark { padding:3rem 1.25rem; }
   .hero-buttons { flex-direction:column; align-items:center; }
+  .perc-box { padding: 2.5rem 1.5rem; }
+}
+
+/* FLOATING 2% BANNER */
+#banner-2perc {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: var(--hneda-primarna);
+  border-top: 2px solid var(--hneda-akcent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.9rem 1.5rem;
+  flex-wrap: wrap;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.35);
+  transition: transform 0.35s ease;
+}
+#banner-2perc.hidden {
+  transform: translateY(110%);
+}
+.banner-badge {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--hneda-akcent);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.banner-text {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.05rem;
+  color: var(--bezova-text);
+  line-height: 1.4;
+  opacity: 0.9;
+}
+.banner-text strong {
+  color: var(--bezova-text);
+  opacity: 1;
+  font-weight: 600;
+}
+.banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  background: var(--hneda-akcent);
+  color: var(--bezova-text);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 1px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.banner-btn:hover { opacity: 0.82; }
+.banner-close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--bezova-text);
+  opacity: 0.45;
+  font-size: 1.3rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.3rem;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.banner-close:hover { opacity: 0.9; }
+@media (max-width: 600px) {
+  #banner-2perc { gap: 0.75rem; padding: 0.85rem 2.5rem 0.85rem 1rem; }
+  .banner-badge { font-size: 1.5rem; }
+  .banner-text { font-size: 0.95rem; }
 }
 </style>
 </head>
@@ -132,6 +250,7 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
     <li><a href="#deti">Deti</a></li>
     <li><a href="#dospeli">Dospelí</a></li>
     <li><a href="#pripravujeme">Pripravujeme</a></li>
+    <li><a href="#dve-percenta">2%</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
   <span class="nav-contact">+421 908 580 598</span>
@@ -184,11 +303,6 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
         </ul>
       </div>
 
-      <!-- SLIDER: O KLUBE
-           Priečinok: images/klub/
-           Pridať foto: skopíruj riadok <img> a zmeň názov súboru
-           Aktuálne súbory: Oklube1–5.jpeg
-           Chýba: kolaz1.jpeg, kolaz2.jpeg — doplniť neskôr -->
       <div class="slider-wrap" id="slider-klub">
         <div class="slider-track">
           <img src="images/klub/Oklube1.jpeg" alt="Tréner Ľudo Moder s dievčatami">
@@ -196,9 +310,6 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
           <img src="images/klub/Oklube3.jpeg" alt="Tréner Ľudo Moder v tanečnom obleku">
           <img src="images/klub/Oklube4.jpeg" alt="Súťažný pár s medailou">
           <img src="images/klub/Oklube5.jpeg" alt="Diamond Cup — deti a tréner">
-          <!-- Po nahratí koláží pridaj:
-          <img src="images/klub/Kolaz1.jpeg" alt="TK M-DANCE — koláž zo súťaží">
-          <img src="images/klub/Kolaz2.jpeg" alt="TK M-DANCE — deti a skupiny"> -->
         </div>
         <button class="slider-btn prev" onclick="sliderMove('slider-klub',-1)">&#8249;</button>
         <button class="slider-btn next" onclick="sliderMove('slider-klub', 1)">&#8250;</button>
@@ -245,10 +356,6 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
         </div>
       </div>
 
-      <!-- SLIDER: DETI
-           Priečinok: images/deti/
-           Pridať foto: skopíruj riadok <img> a zmeň názov súboru
-           Aktuálne súbory: Deti1–4.jpeg -->
       <div class="slider-wrap" id="slider-deti">
         <div class="slider-track">
           <img src="images/deti/Deti1.jpeg" alt="Ľudo Moder s dievčatami v škole">
@@ -304,10 +411,6 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
         </div>
       </div>
 
-      <!-- SLIDER: DOSPELÍ
-           Priečinok: images/dospeli/
-           Pridať foto: skopíruj riadok <img> a zmeň názov súboru
-           Pozor: Dospeli1-2.jpeg, Dsopeli3-6.jpeg (preklep v pôvodnom názve — zachovaný) -->
       <div class="slider-wrap" id="slider-dospeli">
         <div class="slider-track">
           <img src="images/dospeli/Dospeli1.jpeg" alt="Skupina dospelých v tanečnej sále">
@@ -358,15 +461,8 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
         </div>
       </div>
 
-      <!-- SLIDER: LATINO KURZ
-           Priečinok: images/latino/
-           Pridať foto: skopíruj riadok <img> a zmeň názov súboru
-           Zatiaľ žiadne fotky — slider sa zobrazí keď pridáš prvý súbor -->
       <div class="slider-wrap" id="slider-latino" style="background:rgba(138,88,48,0.12); border:2px dashed var(--hneda-akcent); display:flex; align-items:center; justify-content:center;">
-        <div class="slider-track">
-          <!-- Pridaj sem fotky keď budú k dispozícii:
-          <img src="images/latino/Latino1.jpeg" alt="Latino kurz pre ženy seniorky"> -->
-        </div>
+        <div class="slider-track"></div>
         <p style="font-family:'Josefin Sans',sans-serif;font-size:0.68rem;letter-spacing:0.2em;color:var(--hneda-akcent);text-transform:uppercase;position:absolute;">Fotky čoskoro</p>
       </div>
 
@@ -374,8 +470,38 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
   </div>
 </section>
 
+<!-- 2% -->
+<section class="section-dark" id="dve-percenta">
+  <div class="container text-center">
+    <p class="section-label">Podporte nás</p>
+    <h2 class="section-title">Darujte nám 2% z dane</h2>
+    <div class="divider"></div>
+    <p style="max-width:560px; margin:0 auto 1rem; font-size:1.1rem;">
+      Ak vám záleží na rozvoji tanca pre deti, dospelých a seniorov v Hlohovci,
+      môžete nám pomôcť bez toho, aby vás to čokoľvek stálo —
+      stačí poukázať <strong style="color:var(--bezova-text); opacity:1;">2% zo zaplatenej dane z príjmov</strong> na náš klub.
+    </p>
+    <p style="max-width:560px; margin:0 auto 2.5rem; font-size:1.05rem;">
+      Každé euro nám pomáha rozvíjať tréningy, súťaže a tanečné akcie pre naše komunitu.
+      Ďakujeme za vašu podporu!
+    </p>
+
+    <div class="perc-box">
+      <p class="perc-ico">Občianske združenie</p>
+      <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--bezova-text); opacity:1; margin-bottom:0.5rem; font-weight:700;">Tanečné štúdio M</p>
+      <p style="margin-bottom:1.5rem;">
+        Všetky potrebné údaje nájdete v priloženom tlačive — stiahnite ho, vyplňte
+        a odovzdajte na daňovom úrade alebo zašlite spolu s daňovým priznaním.
+      </p>
+      <a href="2perc_TanecnestudioM.pdf" class="btn btn-light" download>
+        ⬇&nbsp;&nbsp;Stiahnuť tlačivo 2%
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- KONTAKT -->
-<section class="section-dark" id="kontakt">
+<section class="section-dark" id="kontakt" style="padding-top:3rem;">
   <div class="container text-center">
     <p class="section-label">Napíšte nám</p>
     <h2 class="section-title">Kontakt</h2>
@@ -394,7 +520,7 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
       </div>
       <div class="contact-item">
         <span class="contact-label">E-mail</span>
-        <a href="mailto:ludovit.moder@gmail.com@gmail.com" class="contact-value">ludovit.moder@gmail.com</a>
+        <a href="mailto:ludovit.moder@gmail.com" class="contact-value">ludovit.moder@gmail.com</a>
       </div>
       <div class="contact-item">
         <span class="contact-label">Facebook</span>
@@ -416,6 +542,18 @@ footer { background:#251408; color:var(--bezova-text); text-align:center; paddin
 <footer>
   © 2025 TK M-DANCE Hlohovec &nbsp;·&nbsp; Všetky práva vyhradené
 </footer>
+
+<!-- FLOATING 2% BANNER -->
+<div id="banner-2perc">
+  <span class="banner-badge">2%</span>
+  <span class="banner-text">
+    <strong>Darujte nám 2% z dane</strong> — nepríde vás to nič a klubu to veľmi pomôže!
+  </span>
+  <a href="2perc_TanecnestudioM.pdf" class="banner-btn" download>
+    ⬇&nbsp; Stiahnuť tlačivo
+  </a>
+  <button class="banner-close" onclick="closeBanner()" aria-label="Zavrieť">✕</button>
+</div>
 
 <!-- SLIDER JavaScript -->
 <script>
@@ -466,6 +604,10 @@ function sliderMove(id, dir) {
 document.addEventListener('DOMContentLoaded', () => {
   ['slider-klub', 'slider-deti', 'slider-dospeli', 'slider-latino'].forEach(initSlider);
 });
+
+function closeBanner() {
+  document.getElementById('banner-2perc').classList.add('hidden');
+}
 </script>
 
 </body>
